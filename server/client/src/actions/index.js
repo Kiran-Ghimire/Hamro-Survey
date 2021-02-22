@@ -15,13 +15,13 @@ export const handleToken = (token)  => async (dispatch) => {
 
 
 export const submitSurvey = (values, history) => async dispatch => {
-        const res= await axios.post('/api/surveys', values);
+        const res= await axios.post('/api/surveys', values); //sending the survey to db 
 
         history.push('/surveys');
         dispatch({type: FETCH_USER, payload: res.data });
 };
 
-export const fetchSurveys= () => async dispatch => {
+export const fetchSurveys= () => async dispatch => { //fetching surveys from db to front end
         const res= await axios.get('/api/surveys');
 
         dispatch({ type: FETCH_SURVEYS, payload: res.data });

@@ -34,7 +34,7 @@ module.exports = app => {
             })
             .compact() //no undefined elements
             .uniqBy( 'email', 'surveyId') //no duplicate emails or survey id
-            .each(({ surveyId, email, choice }) => {
+            .each(({ surveyId, email, choice }) => { //looping on each
                 Survey.updateOne(
                     {
                     _id: surveyId,  
@@ -49,7 +49,6 @@ module.exports = app => {
                 }
                 ).exec();
             })
-
             .value();
             
 
@@ -58,14 +57,16 @@ module.exports = app => {
         res.send({}); 
     });
 
-    app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
+    app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => { //filling the form and saving it to db
         const { title, subject, body, recipients } =req.body;
 
         const survey = new Survey({ //instance of survey
             title,
             subject,
             body,
-            recipients: recipients.split(',').map((email) => ({ email })),  //list of email addresses splitted into and array and return a array of objects
+            recipients: recipients
+                .split(',')
+                .map((email) => ({ email: email.trim() })),  //list of email addresses splitted into and array and return a array of objects
             _user: req.user.id,
             dateSent: Date.now() 
         });

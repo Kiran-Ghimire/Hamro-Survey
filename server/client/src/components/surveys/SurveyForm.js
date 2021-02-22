@@ -9,7 +9,7 @@ import formFields from './formFields';
 
 
 class SurveyForm extends Component {
-    renderFields(){
+    renderFields(){ //to fill the form with proper values
         return _.map(formFields, ({label, name}) => { //iterating over the list of formFields
             return (
                 <Field  key={name} component={SurveyField} type="text" label={label} name={name} />
@@ -24,7 +24,7 @@ class SurveyForm extends Component {
                 <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
                     {this.renderFields()}
                     
-                    <Link to="/surveys" className="red btn-flat white-text">
+                    <Link to="/surveys" className="red btn-flat white-text" >
                         Cancel
                     </Link>
                     

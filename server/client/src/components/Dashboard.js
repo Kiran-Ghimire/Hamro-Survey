@@ -9,8 +9,8 @@ class Dashboard extends Component {
                 <SurveyList />
                 <Link
                     style={{ position: 'absolute', bottom : '50px', right: '50px'}}
-                to="/surveys/new" className="btn-floating btn-large waves-effect waves-light red">
-                    <i className="material-icons">add</i>
+                to="/surveys/new" className="btn-floating btn-large waves-effect waves-light red" style={{position:"fixed", bottom: 0, right: 0, marginBottom: "20px" }}>
+                    <i className="material-icons" >add</i>
                 </Link>
             </div>
             
